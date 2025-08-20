@@ -1,0 +1,36 @@
+meta {
+  name: create message
+  type: http
+  seq: 2
+}
+
+post {
+  url: https://basic-namespace.servicebus.windows.net/start-queue/messages
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: SharedAccessSignature sr=basic-namespace&sig=X7919Jtx5r%2FRC0rB1f82x73%2F1TPsX9%2B7ZXB8Ke8sKw8%3D&se=1756274112&skn=RootManageSharedAccessKey
+}
+
+body:json {
+  {
+    "hi":"hello2"
+  }
+}
+
+script:pre-request {
+  // Get current Unix timestamp in seconds
+  let now = Math.floor(Date.now() / 1000);
+  
+  // Add TTL (e.g., 1 hour = 3600 seconds)
+  let expiry = now + 3600;
+  
+  // Store it in a variable to use in headers
+  bru.setVar("setExpiry", expiry);
+}
+
+settings {
+  encodeUrl: true
+}

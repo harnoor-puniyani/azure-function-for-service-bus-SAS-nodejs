@@ -1,0 +1,25 @@
+meta {
+  name: Test Random API
+  type: http
+  seq: 1
+}
+
+get {
+  url: https://reqres.in/api/test
+  body: none
+  auth: apikey
+}
+
+headers {
+  x-api-key: reqres-free-v1
+}
+
+auth:apikey {
+  key: reqres-free-v1
+  value: 
+  placement: header
+}
+
+settings {
+  encodeUrl: true
+}
